@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#b8973a">
+  <meta name="description" content="A verse-by-verse exegetical commentary on Isaiah, based on the BHS Hebrew text.">
+  <title>Isaiah Commentary — JohnDavid Wilbourn</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: block;
+      min-height: 100vh;
+      background: var(--parchment);
+    }
+
+    .landing-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-bar {
+      background: var(--ink);
+      border-bottom: 1px solid #3a2e1a;
+      padding: 0.6rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-bar-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .top-bar-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .top-bar-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9a8a6a;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .top-bar-links a:hover { color: var(--gold); }
+
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      opacity: 0.85;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      color: var(--ink);
+      letter-spacing: 0.06em;
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+      border: none;
+      padding: 0;
+    }
+
+    .hero-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #7a6040;
+      margin-bottom: 1.6rem;
+      line-height: 1.5;
+    }
+
+    .hero-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 1.8rem;
+      opacity: 0.5;
+    }
+
+    .hero-description {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      color: #5a4820;
+      line-height: 1.8;
+      max-width: 560px;
+      margin: 0 auto 2.8rem;
+    }
+
+    .chapter-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto 2.4rem;
+    }
+
+    .chapter-card {
+      display: block;
+      border: 1px solid var(--rule);
+      padding: 1.6rem 1.4rem;
+      text-decoration: none;
+      background: var(--cream);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      text-align: left;
+    }
+
+    .chapter-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 20px rgba(184,151,58,0.12);
+    }
+
+    .chapter-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .chapter-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    .chapter-meta {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.82rem;
+      color: #9a8060;
+      font-style: italic;
+      line-height: 1.45;
+    }
+
+    .chapter-arrow {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    .anchor-verse {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.88rem;
+      font-style: italic;
+      color: #9a8060;
+      margin-bottom: 2.8rem;
+      line-height: 1.6;
+    }
+
+    .anchor-verse cite {
+      display: block;
+      font-style: normal;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-top: 0.3rem;
+    }
+
+    .landing-footer {
+      background: var(--ink);
+      border-top: 1px solid #3a2e1a;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    .landing-footer p {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: #5a4a2a;
+      text-align: center;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.1rem; }
+      .top-bar-links { gap: 1rem; }
+      .hero { padding: 3.5rem 1.4rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="landing-wrap">
+
+  <nav class="top-bar">
+    <a class="top-bar-brand" href="index.html">Isaiah Commentary</a>
+    <ul class="top-bar-links">
+      <li><a href="isaiah53.html">Isaiah 53</a></li>
+      <li><a href="https://commentary.intelligencereport.info">Romans Road</a></li>
+      <li><a href="https://lessons.intelligencereport.info">Growth Lessons</a></li>
+    </ul>
+  </nav>
+
+  <main class="hero">
+
+    <div class="hero-eyebrow">A Verse-by-Verse Exegetical Commentary</div>
+
+    <h1>Isaiah</h1>
+
+    <p class="hero-subtitle">The Prophet of the Cross</p>
+
+    <div class="hero-rule"></div>
+
+    <p class="hero-description">
+      This commentary works through the book of Isaiah verse by verse,
+      with continuous attention to the Hebrew text of the BHS critical edition.
+      Each chapter develops the exegesis in full — grammatical analysis,
+      doctrinal content, historical background, and the messianic fulfillment
+      in the person and work of Jesus Christ.
+    </p>
+
+    <p class="anchor-verse">
+      "But he was pierced for our transgressions;<br>
+      he was crushed for our iniquities."
+      <cite>Isaiah 53:5 — ESV</cite>
+    </p>
+
+    <div class="chapter-grid">
+      <a class="chapter-card" href="isaiah53.html">
+        <div class="chapter-label">Isaiah 53</div>
+        <div class="chapter-title">The Suffering Servant</div>
+        <div class="chapter-meta">
+          The Prophecy of the Cross &middot; Three lessons &middot; Full Hebrew word study
+        </div>
+        <span class="chapter-arrow">Read Isaiah 53 &rarr;</span>
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="landing-footer">
+    <p>Isaiah Commentary &copy; 2026 JohnDavid Wilbourn &nbsp;&middot;&nbsp; Based on the BHS critical text &nbsp;&middot;&nbsp; ESV quotations</p>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,614 @@
+/* ============================================================
+   ROMANS ROAD — GLOBAL STYLESHEET
+   All volumes share this file. Edit once, updates everywhere.
+   ============================================================ */
+
+/* ── DESIGN TOKENS ─────────────────────────────────────────── */
+:root {
+  --gold:        #b8973a;
+  --gold-light:  #d4b45a;
+  --ink:         #1a1208;
+  --ink-soft:    #2a1f0e;
+  --parchment:   #faf6ee;
+  --cream:       #f3ede0;
+  --rule:        #d4c49a;
+  --greek:       #5c3d1e;
+  --sidebar-w:   280px;
+  --content-max: 820px;
+  /* Set from nav.js to match real #site-top-nav height (sticky sidebar / menu button) */
+  --site-top-nav-h: 48px;
+
+  /* EXPANSION SLOT: theme overrides go here */
+  /* --gold: #your-color; */
+}
+
+/* ── DARK MODE SLOT ─────────────────────────────────────────── */
+/* EXPANSION SLOT: uncomment and customize for dark/night mode */
+/*
+[data-theme="dark"] {
+  --parchment: #0f0d09;
+  --cream:     #1a1610;
+  --ink:       #e8dfc8;
+  --ink-soft:  #c8b890;
+}
+*/
+
+/* ── RESET & BASE ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'EB Garamond', Georgia, serif;
+  background: var(--parchment);
+  color: var(--ink);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  align-content: flex-start;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── SIDEBAR ────────────────────────────────────────────────── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--ink);
+  color: #e8dfc8;
+  height: calc(100vh - var(--site-top-nav-h));
+  position: sticky;
+  top: var(--site-top-nav-h);
+  align-self: flex-start;
+  overflow-y: auto;
+  padding: 0 0 2rem 0;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+#sidebar-header {
+  padding: 1.5rem 1.2rem 1rem;
+  border-bottom: 1px solid #3a2e1a;
+}
+
+#sidebar-header h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+#sidebar-header p {
+  font-size: 0.72rem;
+  color: #9a8a6a;
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+/* Volume navigation tabs */
+#vol-nav {
+  display: flex;
+  border-bottom: 1px solid #3a2e1a;
+}
+
+#vol-nav a {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem 0.3rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  color: #9a8a6a;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: color 0.15s, background 0.15s;
+  border-right: 1px solid #3a2e1a;
+}
+
+#vol-nav a:last-child { border-right: none; }
+#vol-nav a:hover { color: var(--gold); background: var(--ink-soft); }
+#vol-nav a.active { color: var(--gold); background: var(--ink-soft); }
+
+/* Nav search */
+#nav-search {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin: 0.8rem 1rem;
+  width: calc(100% - 2rem);
+  background: var(--ink-soft);
+  border: 1px solid #4a3a1e;
+  border-radius: 4px;
+  padding: 0.4rem 0.7rem;
+  color: #e8dfc8;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+#nav-search::placeholder { color: #6a5a3a; }
+
+/* Nav list */
+#nav-list {
+  list-style: none;
+  padding: 0.5rem 0;
+}
+
+#nav-list li a {
+  display: block;
+  color: #c8b890;
+  text-decoration: none;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  transition: color 0.15s, background 0.15s;
+}
+
+#nav-list li a:hover,
+#nav-list li a.active {
+  color: var(--gold);
+  background: var(--ink-soft);
+}
+
+.nav-h1 a {
+  padding: 0.5rem 1.2rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem !important;
+  color: var(--gold) !important;
+  letter-spacing: 0.05em;
+  border-top: 1px solid #2a2010;
+  margin-top: 0.3rem;
+}
+
+.nav-h2 a { padding: 0.3rem 1.4rem; }
+.nav-h3 a { padding: 0.2rem 1.8rem; color: #8a7a5a !important; font-style: italic; }
+
+/* ── HAMBURGER MENU (mobile) ────────────────────────────────── */
+#menu-toggle {
+  display: none;
+  position: fixed;
+  top: calc(var(--site-top-nav-h) + 0.5rem);
+  left: 1rem;
+  z-index: 200;
+  background: var(--ink);
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+#sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 99;
+}
+
+/* ── MAIN CONTENT ───────────────────────────────────────────── */
+#main {
+  flex: 1;
+  min-width: 0;                   /* ADD THIS */
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 3rem 3.5rem 6rem;
+}
+
+/* ── TYPOGRAPHY ─────────────────────────────────────────────── */
+h1.chapter-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  color: var(--ink);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 0.6rem;
+  margin: 3.5rem 0 0.3rem;
+  letter-spacing: 0.05em;
+}
+
+h1.chapter-title:first-child { margin-top: 0; }
+
+/* Chapter subtitle (Header 1 Sub 1) */
+h2.chapter-subtitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--greek);
+  margin: 0 0 1.8rem;
+  border-bottom: none;
+  padding-bottom: 0;
+  letter-spacing: 0;
+}
+
+h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: #3a2800;
+  margin: 2.2rem 0 0.8rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--rule);
+  letter-spacing: 0.03em;
+}
+
+h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #4a3200;
+  margin: 1.6rem 0 0.5rem;
+}
+
+h4 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  font-style: italic;
+  color: #5a4010;
+  margin: 1.2rem 0 0.4rem;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 0.9rem;
+  text-align: justify;
+  hyphens: auto;
+}
+
+blockquote.esv-quote {
+  margin: 1.2rem 0 1.2rem 1.5rem;
+  padding: 0.8rem 1.2rem;
+  border-left: 3px solid var(--gold);
+  background: var(--cream);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #2a1e08;
+}
+
+.spacer { height: 0.4rem; }
+
+/* ── GLOSSARY TABLES ────────────────────────────────────────── */
+.glossary-wrap {
+  margin: 2rem 0;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow-x: auto;               /* CHANGE overflow: hidden → overflow-x: auto */
+}
+
+.glossary-label {
+  background: var(--ink);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  font-style: normal;
+}
+
+.glossary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.glossary-table td {
+  padding: 0.55rem 0.9rem;
+  vertical-align: top;
+  border-bottom: 1px solid #e8dfc0;
+  line-height: 1.5;
+}
+
+.glossary-table .header-row td {
+  background: var(--ink-soft);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  border-bottom: 2px solid var(--gold);
+}
+
+.glossary-table .alt-row td { background: var(--cream); }
+
+.greek-cell {
+  font-size: 1.05rem;
+  color: var(--greek);
+  white-space: pre-line;
+}
+
+/* ── GREEK POPUP SLOT ───────────────────────────────────────── */
+/* EXPANSION SLOT: Greek term hover popup */
+.greek-term {
+  color: var(--greek);
+  border-bottom: 1px dotted var(--greek);
+  cursor: pointer;
+  /* future: triggers popup with lexical data */
+}
+
+#greek-popup {
+  display: none; /* EXPANSION SLOT: show on greek-term click */
+  position: fixed;
+  background: var(--ink);
+  color: #e8dfc8;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  padding: 1rem;
+  max-width: 300px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  z-index: 300;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* ── CROSS-REFERENCE PANEL SLOT ─────────────────────────────── */
+#xref-panel {
+  display: none; /* EXPANSION SLOT: slide-in cross-reference panel */
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 340px;
+  background: var(--cream);
+  border-left: 2px solid var(--rule);
+  padding: 1.5rem;
+  z-index: 150;
+  overflow-y: auto;
+}
+
+/* ── SEARCH PANEL SLOT ──────────────────────────────────────── */
+#search-panel {
+  display: none; /* EXPANSION SLOT: full-text search across volumes */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--ink);
+  padding: 1rem 2rem;
+  z-index: 250;
+  border-bottom: 2px solid var(--gold);
+}
+
+/* ── USER NOTES SLOT ────────────────────────────────────────── */
+.user-note-anchor {
+  /* EXPANSION SLOT: paragraphs get note icon on hover */
+}
+
+/* ── SCROLL TO TOP ──────────────────────────────────────────── */
+#top-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--ink);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transition: opacity 0.3s;
+  text-decoration: none;
+  z-index: 50;
+}
+
+#top-btn.visible { opacity: 1; }
+
+/* ── READING PROGRESS BAR ───────────────────────────────────── */
+#progress-bar {
+  position: fixed;
+  top: var(--site-top-nav-h);
+  left: 0;
+  height: 3px;
+  background: var(--gold);
+  width: 0%;
+  z-index: 500;
+  transition: width 0.1s;
+}
+
+/* ── SITE TOP NAV (injected by nav.js → initSiteNav) ───────── */
+#site-top-nav {
+  flex: 1 1 100%;
+  width: 100%;
+  order: -1;
+  position: sticky;
+  top: 0;
+  z-index: 250;
+  background: var(--ink);
+  border-bottom: 1px solid #3a2e1a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#site-top-nav > ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem 0.5rem;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0.55rem 1rem;
+  max-width: 1200px;
+}
+
+#site-top-nav > ul > li {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+#site-top-nav > ul > li > a,
+#site-top-nav > ul > li > button {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9a8a6a;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.65rem;
+  display: inline-block;
+  transition: color 0.15s, background 0.15s;
+}
+
+#site-top-nav > ul > li > a:hover,
+#site-top-nav > ul > li > button:hover,
+#site-top-nav > ul > li > a.active {
+  color: var(--gold);
+}
+
+#site-top-nav > ul > li > button:focus-visible,
+#site-top-nav > ul > li > a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+#site-top-nav .site-nav-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 15rem;
+  margin: 0;
+  padding: 0.35rem 0;
+  list-style: none;
+  background: var(--ink-soft);
+  border: 1px solid #4a3a1e;
+  border-radius: 4px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  z-index: 400;
+}
+
+#site-top-nav .site-nav-dropdown.open > .site-nav-menu {
+  display: block;
+}
+
+#site-top-nav .site-nav-menu a {
+  display: block;
+  padding: 0.45rem 1rem;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #c8b890;
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+
+#site-top-nav .site-nav-menu a:hover,
+#site-top-nav .site-nav-menu a.active {
+  color: var(--gold);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+  #site-top-nav > ul {
+    justify-content: flex-start;
+    padding: 0.45rem 0.75rem;
+    gap: 0.15rem 0.35rem;
+  }
+
+  #site-top-nav > ul > li > a,
+  #site-top-nav > ul > li > button {
+    font-size: 0.62rem;
+    padding: 0.35rem 0.45rem;
+  }
+}
+
+/* ── INSTALL BANNER (PWA) ───────────────────────────────────── */
+#install-banner {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--ink);
+  color: #e8dfc8;
+  padding: 0.8rem 1.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  border-top: 1px solid var(--gold);
+  z-index: 400;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#install-banner button {
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  border-radius: 3px;
+  padding: 0.4rem 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#install-banner .dismiss {
+  background: transparent;
+  color: #9a8a6a;
+  border: 1px solid #4a3a1e;
+}
+
+/* ── MOBILE ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  body { display: block; }
+
+  #sidebar {
+    position: fixed;
+    left: 0;
+    top: var(--site-top-nav-h);
+    height: calc(100vh - var(--site-top-nav-h));
+    transform: translateX(-100%);
+    z-index: 260;
+  }
+
+  #sidebar.open { transform: translateX(0); }
+
+  #sidebar-overlay.open { display: block; }
+
+  #menu-toggle { display: flex; }
+
+  #main {
+    padding: 4rem 1.2rem 5rem;
+    max-width: 100%;
+  }
+
+  h1.chapter-title { font-size: 1.3rem; }
+  h2 { font-size: 1rem; }
+
+  blockquote.esv-quote {
+    margin-left: 0.5rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .glossary-table { font-size: 0.82rem; }
+  .glossary-table td { padding: 0.4rem 0.5rem; }
+
+  #top-btn { bottom: 1rem; right: 1rem; }
+}
+
+@media (max-width: 480px) {
+  #main { padding: 4rem 0.9rem 5rem; }
+  p { font-size: 1rem; text-align: left; }
+  h1.chapter-title { font-size: 1.15rem; }
+}
